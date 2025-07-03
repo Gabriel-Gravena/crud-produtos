@@ -1,6 +1,6 @@
 # API de Gerenciamento de Produtos
 
-![Java](https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java)
+![Java](https://img.shields.io/badge/Java-21+-orange?style=for-the-badge&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=spring)
 ![JPA](https://img.shields.io/badge/JPA%2FHibernate-orange?style=for-the-badge&logo=hibernate)
 ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-blue?style=for-the-badge&logo=swagger)
@@ -13,7 +13,7 @@ O projeto utiliza **Spring Data JPA** para persistência de dados e **Springdoc-
 
 ## 💻 Tecnologias Utilizadas
 
-* **Java 17+**: Linguagem de programação principal.
+* **Java 21**: Linguagem de programação principal.
 * **Spring Boot 3.x**: Framework para criação rápida de aplicações.
 * **Spring Web**: Para construção dos endpoints RESTful.
 * **Spring Data JPA**: Para persistência de dados de forma simplificada.
@@ -28,12 +28,12 @@ O projeto utiliza **Spring Data JPA** para persistência de dados e **Springdoc-
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <url-do-seu-repositorio>
+    git clone https://github.com/Gabriel-Gravena/crud-produtos.git
     ```
 
 2.  **Navegue até o diretório do projeto:**
     ```bash
-    cd crud_produto
+    cd crud-produto
     ```
 
 3.  **Execute a aplicação com o Maven:**
