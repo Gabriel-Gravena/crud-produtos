@@ -31,27 +31,22 @@ O projeto utiliza **Spring Data JPA** para persistência de dados com **PostgreS
 * Maven instalado.
 * Uma instância do PostgreSQL em execução.
 
-### Configuração do Banco de Dados
+## Configuração do Banco de Dados
 
-Antes de executar, é necessário configurar a conexão com o banco de dados no arquivo `src/main/resources/application.properties`.
+Para facilitar o versionamento e evitar expor credenciais, o arquivo real de configuração (`application.properties`) **não está no repositório**.  
+Você deve copiar o arquivo de exemplo e editar as credenciais para seu ambiente.
 
-Crie um banco de dados no seu PostgreSQL (ex: `meubanco`) e atualize as seguintes propriedades com suas credenciais:
+```bash
+cp src/main/resources/application.properties.example src/main/resources/application.properties
+```
+Depois, edite o arquivo application.properties com as suas credenciais:
 
-```properties
-# Configuração da Conexão com o PostgreSQL
+```
 spring.datasource.url=jdbc:postgresql://localhost:5432/meubanco
 spring.datasource.username=seu_usuario_aqui
 spring.datasource.password=sua_senha_aqui
-spring.datasource.driver-class-name=org.postgresql.Driver
+```
 
-# Configuração do Hibernate
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-# Configuração do Swagger UI
-springdoc.swagger-ui.path=/documentacao
-springdoc.group-configs.enabled=true
 
 ## ▶️ Como Executar o Projeto
 
