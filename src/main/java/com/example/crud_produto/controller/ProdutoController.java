@@ -47,11 +47,28 @@ public class ProdutoController {
     @PostMapping
     @Operation(summary = "Criar novo produto", description = "Salva novo produto no banco de dados")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Produto criado com sucess"),
+            @ApiResponse(responseCode = "201", description = "Produto criado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     public Produto create(@RequestBody Produto produto) {
         return produtoService.saveProduto(produto);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualizar produto por ID", description = "Atualiza um produto do banco de dados, buscado pelo ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
+    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto novoProduto) {
+        return produtoService.findById(id)
+                .map(produtoAtualizado -> {
+                    produtoAtualizado.setNome(novoProduto.getNome());
+                    produtoAtualizado.setPreco(novoProduto.getPreco());
+
+                    produtoService.saveProduto(produtoAtualizado);
+                    return ResponseEntity.ok(produtoAtualizado);
+                }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
