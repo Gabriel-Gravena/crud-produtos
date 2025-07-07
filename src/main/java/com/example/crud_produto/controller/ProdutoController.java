@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -26,7 +27,7 @@ public class ProdutoController {
     @GetMapping()
     @Operation(summary = "Listar todos produtos", description = "Retorna uma lista com todos produtos cadastrados")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso")
+            @ApiResponse(responseCode = "200", description = "Lista de produtos retornada com sucesso")
     })
     public List<Produto> findAll() {
         return produtoService.findAll();
@@ -60,15 +61,10 @@ public class ProdutoController {
             @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Produto não encontrado")
     })
-    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto novoProduto) {
-        return produtoService.findById(id)
-                .map(produtoAtualizado -> {
-                    produtoAtualizado.setNome(novoProduto.getNome());
-                    produtoAtualizado.setPreco(novoProduto.getPreco());
-
-                    produtoService.saveProduto(produtoAtualizado);
-                    return ResponseEntity.ok(produtoAtualizado);
-                }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Map<Long, String>> update(@PathVariable Long id, @RequestBody Produto novoProduto) {
+        Produto produtoAtualizado = produtoService.updateProduto(novoProduto, id);
+        Map<Long, String> response = Map.of(produtoAtualizado.getId(), "Produto atualizado!");
+        return ResponseEntity.ok().body(response);
     }
 
     @DeleteMapping("/{id}")
